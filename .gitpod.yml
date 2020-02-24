@@ -1,0 +1,16 @@
+image: jelaniwoods/appdev2021-photogram-final@sha256:61df2dae2b4da8caaecdc6bf708764aeaf171d9bfcb353dd309d77cd5c53e76d
+
+tasks:
+  - command: bundle install
+  - init: bin/setup
+ports:
+  - port: 3000
+    onOpen: open-preview
+    visibility: public
+
+vscode:
+  extensions:
+    - shd101wyy.markdown-preview-enhanced
+    - wingrunr21.vscode-ruby
+    - mbessey.vscode-rufo
+    - aliariff.vscode-erb-beautify
