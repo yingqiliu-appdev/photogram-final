@@ -61,6 +61,7 @@ task({ :dummy_data => :environment}) do
   if User.method_defined?(:password) || User.has_attribute?(:password_digest)
     User.all.each do |user|
       user.password = "password"
+      user.email = user.username + "@example.com"
       user.save
     end
     puts "Found a password column. Added passwords."

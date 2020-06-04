@@ -403,6 +403,8 @@ describe "/users/[USERNAME]" do
       find("button", :text => /Sign in/i ).click
     end
 
+    visit "/users/#{famous_bacon.username}"
+    
     expect(page).to have_text(/31 minutes ago/i),
       "Expected page to have text '31 minutes ago', but didn't find it."
   end
