@@ -1,4 +1,4 @@
-FROM gitpod/workspace-full:latest
+FROM gitpod/workspace-full:working
 
 USER root
 
@@ -31,18 +31,19 @@ USER gitpod
 WORKDIR /base-rails
 ENV PATH /usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 RUN /bin/bash -l -c "rvm requirements"
-RUN /bin/bash -l -c "rvm install 2.6.5"
-RUN /bin/bash -l -c "curl https://cli-assets.heroku.com/install.sh | sh"
+RUN /bin/bash -l -c "rvm install 2.6.6"
 
 COPY Gemfile /base-rails/Gemfile
 COPY Gemfile.lock /base-rails/Gemfile.lock
 
-RUN /bin/bash -l -c "rvm use --default 2.6.5"
+RUN /bin/bash -l -c "rvm use --default 2.6.6"
 
 RUN /bin/bash -l -c "gem install bundler"
 RUN /bin/bash -l -c "bundle install"
-RUN /bin/bash -l -c "gem uninstall -i /home/gitpod/.rvm/rubies/ruby-2.6.5/lib/ruby/gems/2.6.0 minitest"
+RUN /bin/bash -l -c "gem uninstall -i /home/gitpod/.rvm/rubies/ruby-2.6.6/lib/ruby/gems/2.6.0 minitest"
+RUN /bin/bash -l -c "curl https://cli-assets.heroku.com/install.sh | sh"
 
 RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 RUN echo 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bashrc
+RUN /bin/bash -l -c "gem install htmlbeautifier"

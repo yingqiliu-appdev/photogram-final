@@ -160,19 +160,19 @@ describe "/users/[USERNAME]" do
     dave_strider.save
 
     photo = Photo.new
-    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
+    photo.image = File.open Rails.root + "spec/support/kirb.gif"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = dave_strider.id
     photo.save
 
     ironic_selfie = Photo.new
-    ironic_selfie.image = "https://sbahj.com/dave.jpeg"
+    ironic_selfie.image = File.open Rails.root + "spec/support/kirb.gif"
     ironic_selfie.caption = "I told you about the Stairs"
     ironic_selfie.owner_id = dave_strider.id
     ironic_selfie.save
 
     austin_photo = Photo.new
-    austin_photo.image = "https://sbahj.com/dave-2.jpeg"
+    austin_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     austin_photo.caption = "I live in texas"
     austin_photo.owner_id = dave_strider.id
     austin_photo.save
@@ -204,19 +204,19 @@ describe "/users/[USERNAME]" do
     john_egbert.save
 
     photo = Photo.new
-    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
+    photo.image = File.open Rails.root + "spec/support/kirb.gif"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = john_egbert.id
     photo.save
 
     ironic_selfie = Photo.new
-    ironic_selfie.image = "https://sbahj.com/john.jpeg"
+    ironic_selfie.image = File.open Rails.root + "spec/support/kirb.gif"
     ironic_selfie.caption = "stack modus"
     ironic_selfie.owner_id = john_egbert.id
     ironic_selfie.save
 
     austin_photo = Photo.new
-    austin_photo.image = "https://sbahj.com/dave-2.jpeg"
+    austin_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     austin_photo.caption = "April 14th"
     austin_photo.owner_id = john_egbert.id
     austin_photo.save
@@ -232,12 +232,12 @@ describe "/users/[USERNAME]" do
 
     visit "/users/#{john_egbert.username}"
 
-    expect(page).to have_tag("img", :with => { :src => photo.image }),
-      "Expect page to have <img> with a 'src' attribute of '#{photo.image}', but didn't"
-    expect(page).to have_tag("img", :with => { :src => ironic_selfie.image }),
-      "Expect page to have <img> with a 'src' attribute of '#{ironic_selfie.image}', but didn't"
-    expect(page).to have_tag("img", :with => { :src => austin_photo.image }),
-      "Expect page to have <img> with a 'src' attribute of '#{austin_photo.image}', but didn't"
+    expect(page).to have_tag("img[src*='#{photo.image_identifier}']"),
+    "Expect page to have <img> with a 'src' attribute containing '#{photo.image_identifier}', but didn't"
+    expect(page).to have_tag("img[src*='#{ironic_selfie.image_identifier}']"),
+    "Expect page to have <img> with a 'src' attribute containing '#{ironic_selfie.image_identifier}', but didn't"
+    expect(page).to have_tag("img[src*='#{austin_photo.image_identifier}']"),
+      "Expect page to have <img> with a 'src' attribute containing '#{austin_photo.image_identifier}', but didn't"
   end
 end
 
@@ -250,19 +250,19 @@ describe "/users/[USERNAME]" do
     john_egbert.save
 
     photo = Photo.new
-    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
+    photo.image = File.open Rails.root + "spec/support/kirb.gif"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = john_egbert.id
     photo.save
 
     ironic_selfie = Photo.new
-    ironic_selfie.image = "https://sbahj.com/john.jpeg"
+    ironic_selfie.image = File.open Rails.root + "spec/support/kirb.gif"
     ironic_selfie.caption = "stack modus"
     ironic_selfie.owner_id = john_egbert.id
     ironic_selfie.save
 
     austin_photo = Photo.new
-    austin_photo.image = "https://sbahj.com/dave-2.jpeg"
+    austin_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     austin_photo.caption = "April 14th"
     austin_photo.owner_id = john_egbert.id
     austin_photo.save
@@ -296,19 +296,19 @@ describe "/users/[USERNAME]" do
     carmen_sandiego.save
 
     photo = Photo.new
-    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
+    photo.image = File.open Rails.root + "spec/support/kirb.gif"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = carmen_sandiego.id
     photo.save
 
     dinner_photo = Photo.new
-    dinner_photo.image = "https://player.net/jules.jpeg"
+    dinner_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     dinner_photo.caption = "Jules"
     dinner_photo.owner_id = carmen_sandiego.id
     dinner_photo.save
 
     group_photo = Photo.new
-    group_photo.image = "https://player.com/the-gang-2.jpeg"
+    group_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     group_photo.caption = "Stealing stuff"
     group_photo.owner_id = carmen_sandiego.id
     group_photo.save
@@ -348,7 +348,7 @@ describe "/users/[USERNAME]" do
     larry.save
 
     photo = Photo.new
-    photo.image = "https://some.test/image.jpg"
+    photo.image = File.open Rails.root + "spec/support/kirb.gif"
     photo.caption = "Some test caption"
     photo.owner_id = drew_mc.id
     photo.save
@@ -388,7 +388,7 @@ describe "/users/[USERNAME]" do
     famous_bacon.save
 
     photo = Photo.new
-    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
+    photo.image = File.open Rails.root + "spec/support/kirb.gif"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = famous_bacon.id
     photo.created_at = 31.minutes.ago
@@ -698,19 +698,19 @@ describe "/users/[USERNAME]" do
     first_photo = Photo.new
     first_photo.owner_id = user.id
     first_photo.caption = "First caption #{rand(100)}"
-    first_photo.image = "First caption #{rand(100)}"
+    first_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     first_photo.save
 
     second_photo = Photo.new
     second_photo.owner_id = other_user.id
     second_photo.caption = "Second caption #{rand(100)}"
-    second_photo.image = "Second caption #{rand(100)}"
+    second_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     second_photo.save
 
     third_photo = Photo.new
     third_photo.owner_id = user.id
     third_photo.caption = "Third caption #{rand(100)}"
-    third_photo.image = "Third caption #{rand(100)}"
+    third_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     third_photo.save
 
     visit "/user_sign_in"

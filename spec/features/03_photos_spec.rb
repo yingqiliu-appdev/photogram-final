@@ -18,23 +18,25 @@ describe "/photos" do
     anonymous.save
 
     ajs_photo = Photo.new
-    ajs_photo.image = "https://catra-spop-#{Time.now.to_i}.jpg"
+    ajs_photo.image = File.open(Rails.root + "spec/support/kirb.gif")
     ajs_photo.caption = "Some test caption #{Time.now.to_i}"
     ajs_photo.owner_id = aj_mickayla.id
     ajs_photo.save
 
     anon_photo = Photo.new
-    anon_photo.image = "https://anon-#{Time.now.to_i}.jpg"
+    anon_photo.image = File.open(Rails.root + "spec/support/kirb.gif")
     anon_photo.caption = "another test caption #{Time.now.to_i}"
     anon_photo.owner_id = anonymous.id
     anon_photo.save
 
     visit "/photos"
 
-    expect(page).to have_tag("img", :with => { :src => ajs_photo.image }),
-      "Expect page to have an <img> with a src attribute of '#{ajs_photo.image}', but didn't find it."
-    expect(page).to_not have_tag("img", :with => { :src => anon_photo.image }),
-      "Expect page to NOT have an <img> with a src attribute of '#{anon_photo.image}', but found it."
+    # expect(page).to have_tag("img", :with => { :src => ajs_photo.image }),
+    expect(page).to have_tag("img[src*='#{ajs_photo.image_identifier}']"),
+    "Expect page to have an <img> with a src attribute of '#{ajs_photo.image_identifier}', but didn't find it."
+    expect(page).to_not have_tag("img[src*='#{anon_photo.image_identifier}']"),
+    # expect(page).to_not have_tag("img", :with => { :src => anon_photo.image }),
+      "Expect page to NOT have an <img> with a src attribute of '#{anon_photo.image_identifier}', but found it."
 
   end
 end
@@ -50,7 +52,7 @@ describe "/photos" do
     busdriver.save
 
     photo = Photo.new
-    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
+    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = busdriver.id
     photo.save
@@ -81,7 +83,7 @@ describe "/photos" do
     busdriver.save
 
     photo = Photo.new
-    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
+    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = busdriver.id
     photo.save
@@ -114,7 +116,7 @@ describe "/photos" do
     busdriver.save
 
     photo = Photo.new
-    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
+    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = busdriver.id
     photo.save
@@ -147,7 +149,7 @@ describe "/photos" do
     busdriver.save
 
     photo = Photo.new
-    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
+    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = busdriver.id
     photo.save
@@ -180,7 +182,7 @@ describe "/photos" do
     busdriver.save
 
     photo = Photo.new
-    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
+    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = busdriver.id
     photo.save
@@ -199,7 +201,7 @@ describe "/photos" do
     visit "/photos"
     
     within(:css, "form") do
-      fill_in "Image", with: "thats-a-cool.jpeg"
+      attach_file "Image", "#{Rails.root}/spec/support/kirb.gif"
       fill_in "Caption", with: "Real time fan dubs"
 
       find("button", :text => /Add photo/i ).click

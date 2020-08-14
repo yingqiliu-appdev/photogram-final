@@ -291,13 +291,13 @@ describe "/users/[USERNAME]/feed" do
     first_other_user_first_photo = Photo.new
     first_other_user_first_photo.owner_id = first_other_user.id
     first_other_user_first_photo.caption = "Some caption z"
-    first_other_user_first_photo.image = "Some caption z"
+    first_other_user_first_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     first_other_user_first_photo.save
 
     first_other_user_second_photo = Photo.new
     first_other_user_second_photo.owner_id = first_other_user.id
     first_other_user_second_photo.caption = "Some caption y"
-    first_other_user_second_photo.image = "Some caption y"
+    first_other_user_second_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     first_other_user_second_photo.save
 
     second_other_user = User.new
@@ -309,13 +309,13 @@ describe "/users/[USERNAME]/feed" do
     second_other_user_first_photo = Photo.new
     second_other_user_first_photo.owner_id = second_other_user.id
     second_other_user_first_photo.caption = "Some caption a"
-    second_other_user_first_photo.image = "Some image a"
+    second_other_user_first_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     second_other_user_first_photo.save
     
     second_other_user_second_photo = Photo.new
     second_other_user_second_photo.owner_id = second_other_user.id
     second_other_user_second_photo.caption = "Some caption b"
-    second_other_user_second_photo.image = "Some caption b"
+    second_other_user_second_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     second_other_user_second_photo.save
 
     third_other_user = User.new
@@ -327,13 +327,13 @@ describe "/users/[USERNAME]/feed" do
     third_other_user_first_photo = Photo.new
     third_other_user_first_photo.owner_id = third_other_user.id
     third_other_user_first_photo.caption = "Some caption c"
-    third_other_user_first_photo.image = "Some image c"
+    third_other_user_first_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     third_other_user_first_photo.save
 
     third_other_user_second_photo = Photo.new
     third_other_user_second_photo.owner_id = third_other_user.id
     third_other_user_second_photo.caption = "Some caption d"
-    third_other_user_second_photo.image = "Some caption d"
+    third_other_user_second_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     third_other_user_second_photo.save
 
     fourth_other_user = User.new
@@ -345,13 +345,13 @@ describe "/users/[USERNAME]/feed" do
     fourth_other_user_first_photo = Photo.new
     fourth_other_user_first_photo.owner_id = fourth_other_user.id
     fourth_other_user_first_photo.caption = "Some caption e"
-    fourth_other_user_first_photo.image = "Some image e"
+    fourth_other_user_first_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     fourth_other_user_first_photo.save
 
     fourth_other_user_second_photo = Photo.new
     fourth_other_user_second_photo.owner_id = fourth_other_user.id
     fourth_other_user_second_photo.caption = "Some caption f"
-    fourth_other_user_second_photo.image = "Some image f"
+    fourth_other_user_second_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     fourth_other_user_second_photo.save
 
     first_follow_request = FollowRequest.new
@@ -422,19 +422,19 @@ describe "/users/[USERNAME]/liked_photos" do
     first_photo = Photo.new
     first_photo.owner_id = other_user.id
     first_photo.caption = "First caption"
-    first_photo.image = "First caption"
+    first_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     first_photo.save
 
     second_photo = Photo.new
     second_photo.owner_id = user.id
     second_photo.caption = "Second caption"
-    second_photo.image = "Second caption"
+    second_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     second_photo.save
 
     third_photo = Photo.new
     third_photo.owner_id = other_user.id
     third_photo.caption = "Third caption"
-    third_photo.image = "Third caption"
+    third_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     third_photo.save
 
     first_like = Like.new
@@ -506,7 +506,7 @@ describe "/users/[USERNAME]/discover" do
     first_other_user_first_liked_photo = Photo.new
     first_other_user_first_liked_photo.owner_id = fourth_other_user.id
     first_other_user_first_liked_photo.caption = "Some caption #{1}"
-    first_other_user_first_liked_photo.image = "Someimage #{1}"
+    first_other_user_first_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     first_other_user_first_liked_photo.save
 
     first_other_user_first_like = Like.new
@@ -517,7 +517,7 @@ describe "/users/[USERNAME]/discover" do
     first_other_user_second_liked_photo = Photo.new
     first_other_user_second_liked_photo.owner_id = fourth_other_user.id
     first_other_user_second_liked_photo.caption = "Some caption 2"
-    first_other_user_second_liked_photo.image = "Some caption 2"
+    first_other_user_second_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     first_other_user_second_liked_photo.save
 
     first_other_user_first_like = Like.new
@@ -528,7 +528,7 @@ describe "/users/[USERNAME]/discover" do
     second_other_user_first_liked_photo = Photo.new
     second_other_user_first_liked_photo.owner_id = fourth_other_user.id
     second_other_user_first_liked_photo.caption = "Some caption 3"
-    second_other_user_first_liked_photo.image = "Some caption 3"
+    second_other_user_first_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     second_other_user_first_liked_photo.save
 
     second_other_user_first_like = Like.new
@@ -539,7 +539,7 @@ describe "/users/[USERNAME]/discover" do
     second_other_user_second_liked_photo = Photo.new
     second_other_user_second_liked_photo.owner_id = fourth_other_user.id
     second_other_user_second_liked_photo.caption = "Some caption 4"
-    second_other_user_second_liked_photo.image = "Some caption 4"
+    second_other_user_second_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     second_other_user_second_liked_photo.save
 
     second_other_user_first_like = Like.new
@@ -550,7 +550,7 @@ describe "/users/[USERNAME]/discover" do
     third_other_user_first_liked_photo = Photo.new
     third_other_user_first_liked_photo.owner_id = fourth_other_user.id
     third_other_user_first_liked_photo.caption = "Some caption 5"
-    third_other_user_first_liked_photo.image = "Some image 5"
+    third_other_user_first_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     third_other_user_first_liked_photo.save
 
     third_other_user_first_like = Like.new
@@ -561,7 +561,7 @@ describe "/users/[USERNAME]/discover" do
     third_other_user_second_liked_photo = Photo.new
     third_other_user_second_liked_photo.owner_id = fourth_other_user.id
     third_other_user_second_liked_photo.caption = "Some caption 6"
-    third_other_user_second_liked_photo.image = "imagelink"
+    third_other_user_second_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     third_other_user_second_liked_photo.save
 
     third_other_user_first_like = Like.new
@@ -572,7 +572,7 @@ describe "/users/[USERNAME]/discover" do
     fourth_other_user_first_liked_photo = Photo.new
     fourth_other_user_first_liked_photo.owner_id = fourth_other_user.id
     fourth_other_user_first_liked_photo.caption = "Some caption 7"
-    fourth_other_user_first_liked_photo.image = "Some caption 7"
+    fourth_other_user_first_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     fourth_other_user_first_liked_photo.save
 
     fourth_other_user_first_like = Like.new
@@ -583,7 +583,7 @@ describe "/users/[USERNAME]/discover" do
     fourth_other_user_second_liked_photo = Photo.new
     fourth_other_user_second_liked_photo.owner_id = fourth_other_user.id
     fourth_other_user_second_liked_photo.caption = "Some caption 8"
-    fourth_other_user_second_liked_photo.image = "Somfiam 8"
+    fourth_other_user_second_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
     fourth_other_user_second_liked_photo.save
 
     fourth_other_user_first_like = Like.new
