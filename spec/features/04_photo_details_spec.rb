@@ -430,8 +430,8 @@ describe "/photos/[ID] - Like Form" do
     visit "/photos/#{photo.id}"
     
     find("button", :text => /Like/i ).click
-
-    expect(photo.likes.count).to be >= (old_likes_count + 1),
+    likes_count = Like.where({ :photo_id => photo.id }).count
+    expect(likes_count).to be >= (old_likes_count + 1),
       "Expected clicking the 'Like' button to add a record to the Likes table, but it didn't."
   end
 end
@@ -469,8 +469,8 @@ describe "/photos/[ID] - Unlike link" do
 
     # Should only display "Unlike" when the signed in user has liked the photo
     find("a", :text => /Unlike/i ).click
-
-    expect(photo.likes.count).to eql(old_likes_count - 1),
+    likes_count = Like.where({ :photo_id => photo.id }).count
+    expect(likes_count).to eql(old_likes_count - 1),
       "Expected clicking the 'Unlike' link to remove a record to the Likes table, but it didn't."
   end
 end

@@ -24,7 +24,7 @@ describe "/photos" do
     ajs_photo.save
 
     anon_photo = Photo.new
-    anon_photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    anon_photo.image = File.open(Rails.root + "spec/support/red.png")
     anon_photo.caption = "another test caption #{Time.now.to_i}"
     anon_photo.owner_id = anonymous.id
     anon_photo.save
