@@ -170,7 +170,7 @@ describe "The home page" do
     visit "/photos"
     
     within(:css, "form") do
-      attach_file "Image", "#{Rails.root}/spec/support/kirb.gif"
+      fill_in "Image", with: "the-eye-watches.jpg"
       fill_in "Caption", with: "The Magnus Institute"
       
       find("button", :text => /Add photo/i).click
@@ -194,7 +194,7 @@ describe "The home page" do
     
     photo = Photo.new
     photo.owner_id = anna_belle.id
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://robohash.org/infinitytrain.png?size=300x300&set=set1"
     photo.caption = "anna's caption"
     photo.save
 
@@ -228,7 +228,7 @@ describe "The home page" do
     
     photo = Photo.new
     photo.owner_id = anna_belle.id
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://robohash.org/su.png?size=300x300&set=set1"
     photo.caption = "anna's caption"
     photo.save
 
@@ -267,7 +267,7 @@ describe "The home page" do
     
     photo = Photo.new
     photo.owner_id = anna_belle.id
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://robohash.org/fear.png?size=300x300&set=set1"
     photo.caption = "anna's caption"
     photo.save
 

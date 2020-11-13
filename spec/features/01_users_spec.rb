@@ -291,13 +291,13 @@ describe "/users/[USERNAME]/feed" do
     first_other_user_first_photo = Photo.new
     first_other_user_first_photo.owner_id = first_other_user.id
     first_other_user_first_photo.caption = "Some caption z"
-    first_other_user_first_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    first_other_user_first_photo.image = "bb8.png"
     first_other_user_first_photo.save
 
     first_other_user_second_photo = Photo.new
     first_other_user_second_photo.owner_id = first_other_user.id
     first_other_user_second_photo.caption = "Some caption y"
-    first_other_user_second_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    first_other_user_second_photo.image = "bb9.png"
     first_other_user_second_photo.save
 
     second_other_user = User.new
@@ -309,13 +309,13 @@ describe "/users/[USERNAME]/feed" do
     second_other_user_first_photo = Photo.new
     second_other_user_first_photo.owner_id = second_other_user.id
     second_other_user_first_photo.caption = "Some caption a"
-    second_other_user_first_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    second_other_user_first_photo.image = "https://robohash.org/#{second_other_user.username}.png?size=300x300&set=set1"
     second_other_user_first_photo.save
     
     second_other_user_second_photo = Photo.new
     second_other_user_second_photo.owner_id = second_other_user.id
     second_other_user_second_photo.caption = "Some caption b"
-    second_other_user_second_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    second_other_user_second_photo.image = "https://robohash.org/#{second_other_user.username}2.png?size=300x300&set=set1"
     second_other_user_second_photo.save
 
     third_other_user = User.new
@@ -327,13 +327,13 @@ describe "/users/[USERNAME]/feed" do
     third_other_user_first_photo = Photo.new
     third_other_user_first_photo.owner_id = third_other_user.id
     third_other_user_first_photo.caption = "Some caption c"
-    third_other_user_first_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    third_other_user_first_photo.image = "https://robohash.org/#{third_other_user.username}.png?size=300x300&set=set1"
     third_other_user_first_photo.save
 
     third_other_user_second_photo = Photo.new
     third_other_user_second_photo.owner_id = third_other_user.id
     third_other_user_second_photo.caption = "Some caption d"
-    third_other_user_second_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    third_other_user_second_photo.image = "https://robohash.org/#{third_other_user.username}2.png?size=300x300&set=set1"
     third_other_user_second_photo.save
 
     fourth_other_user = User.new
@@ -345,13 +345,13 @@ describe "/users/[USERNAME]/feed" do
     fourth_other_user_first_photo = Photo.new
     fourth_other_user_first_photo.owner_id = fourth_other_user.id
     fourth_other_user_first_photo.caption = "Some caption e"
-    fourth_other_user_first_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    fourth_other_user_first_photo.image = "https://robohash.org/#{fourth_other_user.username}.png?size=300x300&set=set1"
     fourth_other_user_first_photo.save
 
     fourth_other_user_second_photo = Photo.new
     fourth_other_user_second_photo.owner_id = fourth_other_user.id
     fourth_other_user_second_photo.caption = "Some caption f"
-    fourth_other_user_second_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    fourth_other_user_second_photo.image = "https://robohash.org/#{fourth_other_user.username}2.png?size=300x300&set=set1"
     fourth_other_user_second_photo.save
 
     first_follow_request = FollowRequest.new
@@ -422,19 +422,19 @@ describe "/users/[USERNAME]/liked_photos" do
     first_photo = Photo.new
     first_photo.owner_id = other_user.id
     first_photo.caption = "First caption"
-    first_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    first_photo.image = "https://robohash.org/snapscube.png?size=300x300&set=set1"
     first_photo.save
 
     second_photo = Photo.new
     second_photo.owner_id = user.id
     second_photo.caption = "Second caption"
-    second_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    second_photo.image = "https://robohash.org/clown_depot.png?size=300x300&set=set1"
     second_photo.save
 
     third_photo = Photo.new
     third_photo.owner_id = other_user.id
     third_photo.caption = "Third caption"
-    third_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    third_photo.image = "https://robohash.org/holly_tones.png?size=300x300&set=set1"
     third_photo.save
 
     first_like = Like.new
@@ -506,7 +506,7 @@ describe "/users/[USERNAME]/discover" do
     first_other_user_first_liked_photo = Photo.new
     first_other_user_first_liked_photo.owner_id = fourth_other_user.id
     first_other_user_first_liked_photo.caption = "Some caption #{1}"
-    first_other_user_first_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    first_other_user_first_liked_photo.image = "https://some.spec/image-#{Time.now.to_i}.jpg"
     first_other_user_first_liked_photo.save
 
     first_other_user_first_like = Like.new
@@ -517,7 +517,7 @@ describe "/users/[USERNAME]/discover" do
     first_other_user_second_liked_photo = Photo.new
     first_other_user_second_liked_photo.owner_id = fourth_other_user.id
     first_other_user_second_liked_photo.caption = "Some caption 2"
-    first_other_user_second_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    first_other_user_second_liked_photo.image = "https://some.spec/image-#{Time.now.to_i}.png"
     first_other_user_second_liked_photo.save
 
     first_other_user_first_like = Like.new
@@ -528,7 +528,7 @@ describe "/users/[USERNAME]/discover" do
     second_other_user_first_liked_photo = Photo.new
     second_other_user_first_liked_photo.owner_id = fourth_other_user.id
     second_other_user_first_liked_photo.caption = "Some caption 3"
-    second_other_user_first_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    second_other_user_first_liked_photo.image = "https://cancel.spec/image-#{Time.now.to_i}.png"
     second_other_user_first_liked_photo.save
 
     second_other_user_first_like = Like.new
@@ -539,7 +539,7 @@ describe "/users/[USERNAME]/discover" do
     second_other_user_second_liked_photo = Photo.new
     second_other_user_second_liked_photo.owner_id = fourth_other_user.id
     second_other_user_second_liked_photo.caption = "Some caption 4"
-    second_other_user_second_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    second_other_user_second_liked_photo.image = "https://robohash.org/#{fourth_other_user.username}.png?size=300x300&set=set1"
     second_other_user_second_liked_photo.save
 
     second_other_user_first_like = Like.new
@@ -550,7 +550,7 @@ describe "/users/[USERNAME]/discover" do
     third_other_user_first_liked_photo = Photo.new
     third_other_user_first_liked_photo.owner_id = fourth_other_user.id
     third_other_user_first_liked_photo.caption = "Some caption 5"
-    third_other_user_first_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    third_other_user_first_liked_photo.image = "https://robohash.org/#{fourth_other_user.username}2.png?size=300x300&set=set1"
     third_other_user_first_liked_photo.save
 
     third_other_user_first_like = Like.new
@@ -561,7 +561,7 @@ describe "/users/[USERNAME]/discover" do
     third_other_user_second_liked_photo = Photo.new
     third_other_user_second_liked_photo.owner_id = fourth_other_user.id
     third_other_user_second_liked_photo.caption = "Some caption 6"
-    third_other_user_second_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    third_other_user_second_liked_photo.image = "https://robohash.org/#{fourth_other_user.username}3.png?size=300x300&set=set1"
     third_other_user_second_liked_photo.save
 
     third_other_user_first_like = Like.new
@@ -572,7 +572,7 @@ describe "/users/[USERNAME]/discover" do
     fourth_other_user_first_liked_photo = Photo.new
     fourth_other_user_first_liked_photo.owner_id = fourth_other_user.id
     fourth_other_user_first_liked_photo.caption = "Some caption 7"
-    fourth_other_user_first_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    fourth_other_user_first_liked_photo.image = "https://robohash.org/#{fourth_other_user.username}5.png?size=300x300&set=set1"
     fourth_other_user_first_liked_photo.save
 
     fourth_other_user_first_like = Like.new
@@ -583,7 +583,7 @@ describe "/users/[USERNAME]/discover" do
     fourth_other_user_second_liked_photo = Photo.new
     fourth_other_user_second_liked_photo.owner_id = fourth_other_user.id
     fourth_other_user_second_liked_photo.caption = "Some caption 8"
-    fourth_other_user_second_liked_photo.image = File.open Rails.root + "spec/support/kirb.gif"
+    fourth_other_user_second_liked_photo.image = "https://robohash.org/#{fourth_other_user.username}6.png?size=300x300&set=set1"
     fourth_other_user_second_liked_photo.save
 
     fourth_other_user_first_like = Like.new
@@ -640,4 +640,3 @@ describe "/users/[USERNAME]/discover" do
       "Expect page to have text '#{third_other_user_first_liked_photo}', but didn't"
   end
 end
-

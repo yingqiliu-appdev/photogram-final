@@ -10,7 +10,7 @@ describe "/photos/[ID]" do
     drew_mc.save
 
     photo = Photo.new
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://robohash.org/dolorehicincidunt.png?size=300x300&set=set1"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = drew_mc.id
     photo.save
@@ -26,8 +26,8 @@ describe "/photos/[ID]" do
 
     visit "/photos/#{photo.id}"
 
-    expect(page).to have_tag("img[src*='#{photo.image_identifier}']"),
-      "Expected page to have an <img> tag with a 'src' attribute of #{photo.image_identifier}, but didn't find one."
+    expect(page).to have_tag("img", :with => { :src => photo.image}),
+      "Expected page to have an <img> tag with a 'src' attribute of #{photo.image}, but didn't find one."
 
   end
 end
@@ -41,7 +41,7 @@ describe "/photos/[ID] - Delete this photo link" do
     first_user.save
 
     photo = Photo.new
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://robohash.org/alice.png?size=300x300&set=set1"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = first_user.id
     photo.save
@@ -74,7 +74,7 @@ describe "/photos/[ID]" do
     nancy_drew.save
 
     photo = Photo.new
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://robohash.org/drewnance.png?size=300x300&set=set1"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = nancy_drew.id
     photo.save
@@ -110,7 +110,7 @@ describe "/photos/[ID]" do
     cameron_diaz.save
 
     photo = Photo.new
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = cameron_diaz.id
     photo.save
@@ -140,7 +140,7 @@ describe "/photos/[ID]" do
     famous_bacon.save
 
     photo = Photo.new
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = famous_bacon.id
     photo.save
@@ -183,7 +183,7 @@ describe "/photos/[ID]" do
     famous_bacon.save
 
     photo = Photo.new
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = famous_bacon.id
     photo.created_at = 50.minutes.ago
@@ -216,12 +216,12 @@ describe "/photos/[ID]" do
 
     photo = Photo.new
     photo.owner_id = user.id
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "http://www.defaultimage.jpg"
     photo.save
 
     other_photo = Photo.new
     other_photo.owner_id = user.id
-    other_photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    other_photo.image = "http://www.not_this_image.png"
     other_photo.save
 
     first_commenter = User.new
@@ -294,7 +294,7 @@ describe "/photos/[ID]" do
 
     photo = Photo.new
     photo.owner_id = user.id
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://robohash.org/dolorehicincidunt.png?size=300x300&set=set1"
     photo.save
 
     first_commenter = User.new
@@ -350,7 +350,7 @@ describe "/photos/[ID] - Delete this photo button" do
     first_user.save
 
     photo = Photo.new
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = first_user.id
     photo.save
@@ -382,7 +382,7 @@ describe "/photos/[ID] - Update photo form" do
     first_user.save
 
     photo = Photo.new
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = first_user.id
     photo.save
@@ -411,7 +411,7 @@ describe "/photos/[ID] - Like Form" do
     first_user.save
 
     photo = Photo.new
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = first_user.id
     photo.likes_count = 0
@@ -430,7 +430,8 @@ describe "/photos/[ID] - Like Form" do
     visit "/photos/#{photo.id}"
     
     find("button", :text => /Like/i ).click
-    likes_count = Like.where({ :photo_id => photo.id }).count
+
+    likes_count = Like.where({ :photo_id => photo.id }).count	
     expect(likes_count).to be >= (old_likes_count + 1),
       "Expected clicking the 'Like' button to add a record to the Likes table, but it didn't."
   end
@@ -445,7 +446,7 @@ describe "/photos/[ID] - Unlike link" do
     first_user.save
 
     photo = Photo.new
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://some.test/image-#{Time.now.to_i}.jpg"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = first_user.id
     photo.likes_count = 1
@@ -469,8 +470,8 @@ describe "/photos/[ID] - Unlike link" do
 
     # Should only display "Unlike" when the signed in user has liked the photo
     find("a", :text => /Unlike/i ).click
-    likes_count = Like.where({ :photo_id => photo.id }).count
-    expect(likes_count).to eql(old_likes_count - 1),
+
+    expect(photo.likes.count).to eql(old_likes_count - 1),
       "Expected clicking the 'Unlike' link to remove a record to the Likes table, but it didn't."
   end
 end
@@ -486,7 +487,7 @@ describe "/photos/[ID] — Add comment form" do
     first_user.save
 
     photo = Photo.new
-    photo.image = File.open(Rails.root + "spec/support/kirb.gif")
+    photo.image = "https://robohash.org/darrenkorb.png?size=300x300&set=set1"
     photo.caption = "Some test caption #{Time.now.to_i}"
     photo.owner_id = first_user.id
     photo.likes_count = 0
