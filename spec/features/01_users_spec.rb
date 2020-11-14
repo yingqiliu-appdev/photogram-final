@@ -275,7 +275,7 @@ end
 
 
 describe "/users/[USERNAME]/feed" do
-  it "has the photos posted by the people the user is following", :points => 0 do
+  it "has the photos posted by the people the user is following", :points => 3 do
     user = User.new
     user.username = "believe_in_yourself"
     user.email = "believe_in_yourself@example.com"
