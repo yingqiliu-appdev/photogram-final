@@ -351,18 +351,23 @@ describe "/users/[USERNAME]" do
     photo.image = File.open Rails.root + "spec/support/kirb.gif"
     photo.caption = "Some test caption"
     photo.owner_id = drew_mc.id
+    photo.likes_count = 0
+    photo.comments_count = 0
     photo.save
-
+    
     like = Like.new
     like.fan_id = drew_mc.id
     like.photo_id = photo.id
     like.save
-
+    
     other_like = Like.new
     other_like.fan_id = larry.id
     other_like.photo_id = photo.id
     other_like.save
-
+    
+    photo.likes_count = 2
+    photo.save
+    
     visit "/user_sign_in"
     
     within(:css, "form") do

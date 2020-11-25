@@ -142,6 +142,8 @@ describe "/photos/[ID]" do
     photo = Photo.new
     photo.image = File.open(Rails.root + "spec/support/kirb.gif")
     photo.caption = "Some test caption #{Time.now.to_i}"
+    photo.likes_count = 0
+    photo.comments_count = 0
     photo.owner_id = famous_bacon.id
     photo.save
 
