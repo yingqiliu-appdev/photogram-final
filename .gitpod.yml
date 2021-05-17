@@ -1,4 +1,4 @@
-image: jelaniwoods/appdev2021-photogram-final
+image: jelaniwoods/appdev2021-photogram-final@sha256:fc0c8194927907b0e89fd77c8ea9e576051db67af272b82ce50bcdf9364b9da5
 
 tasks:
   - init: bin/setup
