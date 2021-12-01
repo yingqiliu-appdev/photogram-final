@@ -618,7 +618,7 @@ describe "/users/[USERNAME]" do
       "Expect page to have <button> with text 'Update user', but didn't find it."
     
     expect(page).to_not have_tag("input", :with => { :value => joemama.username } ),
-      "Expect page to have <input> with value '#{joemama.username}', but didn't find it."
+      "Expect page to not have <input> with value '#{joemama.username}', but found one."
   
   end
 end
