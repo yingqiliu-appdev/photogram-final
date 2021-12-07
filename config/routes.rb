@@ -59,8 +59,18 @@ Rails.application.routes.draw do
   # Routes for the User resource:
 
   # CREATE
+  get("/user_sign_up", { :controller => "users", :action => "signup_form"})
   post("/insert_user", { :controller => "users", :action => "create" })
-          
+  
+  # SIGN IN FORM
+  get("/user_sign_in", { :controller => "users", :action => "sign_in_form" })
+  
+  # AUTHENTICATE AND STORE COOKIE
+  post("/user_verify_credentials", { :controller => "users", :action => "create_cookie" })
+  
+  # SIGN OUT        
+  get("/user_sign_out", { :controller => "users", :action => "destroy_cookies" })
+
   # READ
   get("/users", { :controller => "users", :action => "index" })
   get("/", { :controller => "users", :action => "index" })
@@ -73,6 +83,7 @@ Rails.application.routes.draw do
   
   # DELETE
   get("/delete_user/:path_id", { :controller => "users", :action => "destroy" })
+
 
   #------------------------------
 
