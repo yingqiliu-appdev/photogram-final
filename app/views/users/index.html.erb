@@ -44,6 +44,10 @@
         <td>
           <% if session.fetch(:user_id) != nil %>
 
+            <%# first find the record, to see if pending or approved %>
+
+            <%# if no record, show this form %>
+
             <form action="/insert_follow_request" method="post">
 
               <label for="recipient"></label>

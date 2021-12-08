@@ -13,7 +13,7 @@
 #
 class Photo < ApplicationRecord
 
-  mount_uploader :image, PhotoUploader
+  mount_uploader :image, ImageUploader
 
 def comments
   return Comment.where({ :photo_id => self.id})
