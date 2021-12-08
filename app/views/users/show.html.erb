@@ -36,7 +36,34 @@
         <%= @the_user.followers.count.to_s %>
       </dd>
       <dd>
-        Follow/Unfollow
+        <% follow_request = FollowRequest.where({ :recipient_id => @the_user.id, :sender_id => session.fetch(:user_id) }).at(0)%>
+        <% if follow_request == nil %>
+          <form action="/insert_follow_request" method="post">
+
+            <label for="recipient"></label>
+            <input type="hidden" id= "recipient" name= "query_recipient_id" value= "<%= @the_user.id %>" >
+
+            <% if @the_user.private? %> 
+              <label for= "status"></label>
+              <input type= "hidden" id="status" name= "query_status" value= "pending">
+            <% else %>
+              <label for= "status"></label>
+              <input type= "hidden" id="status" name= "query_status" value= "accepted">
+            <% end %>              
+          
+            <button>follow</button>
+          </form>
+
+        <% else %>
+          <form action= "/delete_follow_request">
+            <div>
+              <label for= "recipient"></label>
+              <input type= "hidden" id="recipient" name= "query_recipient_id" value= "<%= @the_user.id %>">
+            </div>
+            
+            <button>Unfollow</button>
+          </form>
+        <% end %>
       </dd>
 
       <dt>
@@ -118,6 +145,15 @@
 
 <% end %>
 
+<ul>
+  <li><a href="">Profile</a></li>
+  <li><a href="">Liked Photos</a></li>
+  <li><a href="/users/believe_in_yourself/feed">Feed</a></li>
+  <li><a href="">Discover</a></li>
+  
+</ul>
+
+<h1>Own photos (<%= @the_user.post.count%>) </h1>
 <table border="1">
   <tr>
     <th>

@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   post("/modify_follow_request/:path_id", { :controller => "follow_requests", :action => "update" })
   
   # DELETE
-  get("/delete_follow_request/:path_id", { :controller => "follow_requests", :action => "destroy" })
+  get("/delete_follow_request", { :controller => "follow_requests", :action => "destroy" })
 
   #------------------------------
 
@@ -96,6 +96,9 @@ Rails.application.routes.draw do
   
   get("/photos/:path_id", { :controller => "photos", :action => "show" })
   
+  # FEED
+  get("/users/believe_in_yourself/feed", { :controller => "photos", :action => "feed"})
+
   # UPDATE
   
   post("/modify_photo/:path_id", { :controller => "photos", :action => "update" })

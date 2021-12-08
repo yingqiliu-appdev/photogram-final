@@ -45,24 +45,48 @@
           <% if session.fetch(:user_id) != nil %>
 
             <%# first find the record, to see if pending or approved %>
-
+            <% follow_request = FollowRequest.where({ :recipient_id => a_user.id, :sender_id => session.fetch(:user_id) }).at(0) %>
+            <% if follow_request != nil %>
+              <% if follow_request.status == "accepted" %>
+                <form action= "/delete_follow_request">
+                  <div>
+                    <label for= "recipient"></label>
+                    <input type= "hidden" id="recipient" name= "query_recipient_id" value= "<%= a_user.id %>">
+                  </div>
+                  
+                  <a>Unfollow</a>
+                </form>
+              <% else follow_request.status == "pending" %>
+                <div>
+                  Request sent.
+                  <form action= "/delete_follow_request">
+                    <div>
+                      <label for= "recipient"></label>
+                      <input type= "hidden" id="recipient" name= "query_recipient_id" value= "<%= a_user.id %>">
+                    </div>
+                    
+                    <a>Cancel</a>
+                  </form>
+                </div>
+              <% end %>
             <%# if no record, show this form %>
+            <% else follow_request == nil %>
+              <form action="/insert_follow_request" method="post">
 
-            <form action="/insert_follow_request" method="post">
+                <label for="recipient"></label>
+                <input type="hidden" id= "recipient" name= "query_recipient_id" value= "<%= a_user.id %>" >
 
-              <label for="recipient"></label>
-              <input type="hidden" id= "recipient" name= "query_recipient_id" value= "<%= a_user.id %>" >
-
-              <% if a_user.private? %> 
-                <label for= "status"></label>
-                <input type= "hidden" id="status" name= "query_status" value= "pending">
-              <% else %>
-                <label for= "status"></label>
-                <input type= "hidden" id="status" name= "query_status" value= "accepted">
-              <% end %>              
-            
-              <button>follow</button>
-            </form>
+                <% if a_user.private? %> 
+                  <label for= "status"></label>
+                  <input type= "hidden" id="status" name= "query_status" value= "pending">
+                <% else %>
+                  <label for= "status"></label>
+                  <input type= "hidden" id="status" name= "query_status" value= "accepted">
+                <% end %>              
+              
+                <button>follow</button>
+              </form>
+            <% end %>
           <% end %>
         </td>
 

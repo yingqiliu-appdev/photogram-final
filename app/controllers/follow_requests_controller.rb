@@ -52,11 +52,11 @@ class FollowRequestsController < ApplicationController
   end
 
   def destroy
-    the_id = params.fetch("path_id")
-    the_follow_request = FollowRequest.where({ :id => the_id }).at(0)
+    recipient_id = params.fetch("query_recipient_id")
+    the_follow_request = FollowRequest.where({ :recipient_id => recipient_id, :sender_id => session.fetch( :user_id ) }).at(0)
 
     the_follow_request.destroy
 
-    redirect_to("/follow_requests", { :notice => "Follow request deleted successfully."} )
+    redirect_to("/", { :notice => "Follow request deleted successfully."} )
   end
 end

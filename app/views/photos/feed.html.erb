@@ -1,0 +1,101 @@
+
+<h1>
+  <%= @current_user.username %>
+</h1>
+
+
+<dl>
+
+  <dt>
+    Private
+  </dt>
+  <dd>
+    <%= @current_user.private %>
+  </dd>
+
+  <dt>
+    Followers
+  </dt>
+  <dd>
+    <%= @current_user.followers.count.to_s %>
+  </dd>
+  <dd>
+    Follow/Unfollow
+  </dd>
+
+  <dt>
+    Following
+  </dt>
+  <dd>
+    <%= @current_user.following.count.to_s %>
+  </dd>
+
+</dl>
+
+
+<ul>
+  <li><a href="">Profile</a></li>
+  <li><a href="">Liked Photos</a></li>
+  <li><a href="/feed">Feed</a></li>
+  <li><a href="">Discover</a></li>
+  
+</ul>
+
+<h1>Feed (<%= @current_user.feed.count %>) </h1>
+<table border="1">
+  <tr>
+    <th>
+      Image
+    </th>
+
+    <th>
+      Owner
+    </th>
+
+    <th>
+      Caption
+    </th>
+
+    <th>
+      Posted
+    </th>
+
+    <th>
+      Likes
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @current_user.feed.each do |a_photo| %>
+    <tr>
+      <td>
+        <%# this is causing issues %>
+        <img src="<%#= a_photo.cloud_name %>" class="img-responsive">  
+      </td>
+
+      <td>
+        <%= a_photo.owner_id %>
+      </td>
+
+      <td>
+        <%= a_photo.caption %>
+      </td>
+
+      <td>
+        <%= time_ago_in_words(a_photo.created_at) %> ago
+      </td>
+
+      <td>
+        <%= a_photo.likes_count %>
+      </td>
+
+      <td>
+        <a href="/photos/<%= a_photo.id %>">
+          Show details
+        </a>
+      </td>
+    </tr>
+  <% end %>
+</table>

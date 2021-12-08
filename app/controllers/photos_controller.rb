@@ -57,4 +57,10 @@ class PhotosController < ApplicationController
 
     redirect_to("/photos", { :notice => "Photo deleted successfully."} )
   end
+
+  def Feed 
+
+    render({ :template => "photos/feed.html.erb"})
+  end
+
 end
