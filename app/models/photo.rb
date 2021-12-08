@@ -15,4 +15,9 @@ class Photo < ApplicationRecord
 
   mount_uploader :image, PhotoUploader
 
+def comments
+  return Comment.where({ :photo_id => self.id})
+end
+
+
 end

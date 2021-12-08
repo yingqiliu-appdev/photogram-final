@@ -33,7 +33,7 @@
         Followers
       </dt>
       <dd>
-        <%= @the_user.followers.count %>
+        <%= @the_user.followers.count.to_s %>
       </dd>
       <dd>
         Follow/Unfollow
@@ -43,7 +43,7 @@
         Following
       </dt>
       <dd>
-        <%= @the_user.following.count %>
+        <%= @the_user.following.count.to_s %>
       </dd>
 
     </dl>
@@ -51,6 +51,7 @@
 </div>
 
 <hr>
+
 
 <% if @current_user.id == @the_user.id %>
   <div>
@@ -114,6 +115,7 @@
       </form>
     </div>
   </div>
+
 <% end %>
 
 <table border="1">

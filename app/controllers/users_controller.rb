@@ -66,7 +66,7 @@ class UsersController < ApplicationController
       redirect_to("/users", { :notice => "User created successfully." })
     
     else
-      redirect_to("/user_sign_up", { :notice => "User failed to create successfully." })
+      redirect_to("/user_sign_up", { :alert => "User failed to create successfully." })
     
     end
   end

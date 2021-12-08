@@ -43,7 +43,22 @@
 
         <td>
           <% if session.fetch(:user_id) != nil %>
-            <button action="">follow</button>
+
+            <form action="/insert_follow_request" method="post">
+
+              <label for="recipient"></label>
+              <input type="hidden" id= "recipient" name= "query_recipient_id" value= "<%= a_user.id %>" >
+
+              <% if a_user.private? %> 
+                <label for= "status"></label>
+                <input type= "hidden" id="status" name= "query_status" value= "pending">
+              <% else %>
+                <label for= "status"></label>
+                <input type= "hidden" id="status" name= "query_status" value= "accepted">
+              <% end %>              
+            
+              <button>follow</button>
+            </form>
           <% end %>
         </td>
 

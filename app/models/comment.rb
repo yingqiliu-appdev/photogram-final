@@ -10,4 +10,10 @@
 #  photo_id   :integer
 #
 class Comment < ApplicationRecord
+
+
+  def commenter
+    return User.where({ :id => self.author_id}).at(0)
+    
+  end
 end
