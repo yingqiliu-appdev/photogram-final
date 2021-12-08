@@ -8,11 +8,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    the_id = params.fetch("path_id")
+    the_username = params.fetch("the_username")
 
-    matching_users = User.where({ :id => the_id })
+    matching_users = User.where({ :username => the_username })
 
     @the_user = matching_users.at(0)
+
+    @list_of_photos = Photo.where({ :owner_id => @the_user.id})
 
     render({ :template => "users/show.html.erb" })
   end
@@ -69,33 +71,40 @@ class UsersController < ApplicationController
     end
   end
 
+  def modify
+
+    render({ :template => "users/edit_profile.html.erb"})
+
+  end
+
+
   def update
-    the_id = params.fetch("path_id")
-    the_user = User.where({ :id => the_id }).at(0)
+    @current_user.comments_count = params.fetch("query_comments_count")
+    @current_user.email = params.fetch("query_email")
+    @current_user.likes_count = params.fetch("query_likes_count")
+    @current_user.password = params.fetch("query_password")
+    @current_user.password_confirmation = params.fetch("query_password_confirmation")
+    @current_user.private = params.fetch("query_private", false)
+    @current_user.username = params.fetch("query_username")
 
-    the_user.comments_count = params.fetch("query_comments_count")
-    the_user.email = params.fetch("query_email")
-    the_user.likes_count = params.fetch("query_likes_count")
-    the_user.password_digest = params.fetch("query_password_digest")
-    the_user.private = params.fetch("query_private", false)
-    the_user.username = params.fetch("query_username")
-
-    if the_user.valid?
-      the_user.save
-      redirect_to("/users/#{the_user.id}", { :notice => "User updated successfully."} )
+    if @current_user.valid?
+      @current_user.save
+      redirect_to("/", { :notice => "User updated successfully."} )
     else
-      redirect_to("/users/#{the_user.id}", { :alert => "User failed to update successfully." })
+      redirect_to("/edit_user_profile", { :alert => "User failed to update successfully." })
     end
   end
 
+
   def destroy
-    the_id = params.fetch("path_id")
-    the_user = User.where({ :id => the_id }).at(0)
+    the_username = params.fetch("the_username")
+    the_user = User.where({ :username => the_username }).at(0)
 
     the_user.destroy
 
     redirect_to("/users", { :notice => "User deleted successfully."} )
   end
+
 
   def signup_form
     render({ :template => "users/user_signup.html.erb"})

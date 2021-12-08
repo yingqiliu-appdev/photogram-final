@@ -75,14 +75,14 @@ Rails.application.routes.draw do
   get("/users", { :controller => "users", :action => "index" })
   get("/", { :controller => "users", :action => "index" })
   
-  get("/users/:path_id", { :controller => "users", :action => "show" })
+  get("/users/:the_username", { :controller => "users", :action => "show" })
   
   # UPDATE
-  
-  post("/modify_user/:path_id", { :controller => "users", :action => "update" })
+  get("/edit_user_profile", { :controller => "users", :action => "modify"})
+  post("/modify_user", { :controller => "users", :action => "update" })
   
   # DELETE
-  get("/delete_user/:path_id", { :controller => "users", :action => "destroy" })
+  get("/delete_user/:the_username", { :controller => "users", :action => "destroy" })
 
 
   #------------------------------

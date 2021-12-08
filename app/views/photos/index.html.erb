@@ -14,13 +14,13 @@
       Add a new photo
     </h2>
 
-    <form action="/insert_photo" method="post">
+    <form action="/insert_photo" method="post" class="form-horizontal" enctype="multipart/form-data">
 
       <div>
-        <label for="image_box">
+        <label for="avatar">
           Image
         </label>
-
+        <input type="file" id="avatar" name="avatar" class="form-control">
         <input type="text" id="image_box" name="query_image">
       </div>
 
@@ -73,7 +73,8 @@
       <% @list_of_photos.each do |a_photo| %>
       <tr>
         <td>
-          <img src="<%= a_photo.image %>">  
+          <%# this is causing issues %>
+          <img src="<%#= a_photo.cloud_name %>" class="img-responsive">  
         </td>
 
         <td>

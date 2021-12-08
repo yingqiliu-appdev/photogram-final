@@ -20,7 +20,7 @@ class PhotosController < ApplicationController
   def create
     the_photo = Photo.new
     the_photo.caption = params.fetch("query_caption")
-    the_photo.image = params.fetch("query_image")
+    the_photo.avatar = params.fetch(:avatar)
     the_photo.owner_id = session[:user_id]
 
     if the_photo.valid?

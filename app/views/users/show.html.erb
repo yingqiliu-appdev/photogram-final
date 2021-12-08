@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      User #<%= @the_user.id %> details
+      <%= @the_user.username %>
     </h1>
 
     <div>
@@ -11,41 +11,16 @@
         </a>
       </div>
 
-      <div>
-        <a href="/delete_user/<%= @the_user.id %>">
-          Delete user
-        </a>
-      </div>
+      <% if @current_user.id == @the_user.id %>
+        <div>
+          <a href="/delete_user/<%= @the_user.username %>">
+            Delete user
+          </a>
+        </div>
+      <% end %>
     </div>
 
     <dl>
-      <dt>
-        Comments count
-      </dt>
-      <dd>
-        <%= @the_user.comments_count %>
-      </dd>
-
-      <dt>
-        Email
-      </dt>
-      <dd>
-        <%= @the_user.email %>
-      </dd>
-
-      <dt>
-        Likes count
-      </dt>
-      <dd>
-        <%= @the_user.likes_count %>
-      </dd>
-
-      <dt>
-        Password digest
-      </dt>
-      <dd>
-        <%= @the_user.password_digest %>
-      </dd>
 
       <dt>
         Private
@@ -55,92 +30,148 @@
       </dd>
 
       <dt>
-        Username
+        Followers
       </dt>
       <dd>
-        <%= @the_user.username %>
+        <%= @the_user.followers.count %>
+      </dd>
+      <dd>
+        Follow/Unfollow
       </dd>
 
       <dt>
-        Created at
+        Following
       </dt>
       <dd>
-        <%= time_ago_in_words(@the_user.created_at) %> ago
+        <%= @the_user.following.count %>
       </dd>
 
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_user.updated_at) %> ago
-      </dd>
     </dl>
   </div>
 </div>
 
 <hr>
 
-
-<div>
+<% if @current_user.id == @the_user.id %>
   <div>
-    <h2>
-      Edit user
-    </h2>
+    <div>
+      <h2>
+        Edit user
+      </h2>
 
-    <form action="/modify_user/<%= @the_user.id %>"  method="post" >
-      <div>
-        <label for="comments_count_box">
-          Comments count
-        </label>
+      <form action="/modify_user/<%= @the_user.username %>"  method="post" >
+        <div>
+          <label for="comments_count_box">
+            Comments count
+          </label>
 
-        <input type="text" id="comments_count_box" name="query_comments_count" value="<%= @the_user.comments_count %>">
-      </div>
+          <input type="text" id="comments_count_box" name="query_comments_count" value="<%= @the_user.comments_count %>">
+        </div>
 
-      <div>
-        <label for="email_box">
-          Email
-        </label>
+        <div>
+          <label for="email_box">
+            Email
+          </label>
 
-        <input type="text" id="email_box" name="query_email" value="<%= @the_user.email %>">
-      </div>
+          <input type="text" id="email_box" name="query_email" value="<%= @the_user.email %>">
+        </div>
 
-      <div>
-        <label for="likes_count_box">
-          Likes count
-        </label>
+        <div>
+          <label for="likes_count_box">
+            Likes count
+          </label>
 
-        <input type="text" id="likes_count_box" name="query_likes_count" value="<%= @the_user.likes_count %>">
-      </div>
+          <input type="text" id="likes_count_box" name="query_likes_count" value="<%= @the_user.likes_count %>">
+        </div>
 
-      <div>
-        <label for="password_digest_box">
-          Password digest
-        </label>
+        <div>
+          <label for="password_digest_box">
+            Password digest
+          </label>
 
-        <input type="text" id="password_digest_box" name="query_password_digest" value="<%= @the_user.password_digest %>">
-      </div>
+          <input type="text" id="password_digest_box" name="query_password_digest" value="<%= @the_user.password_digest %>">
+        </div>
 
-      <div>
-        <input type="checkbox" id="private_box" name="query_private" value="1" <%= "checked" if @the_user.private %>>
+        <div>
+          <input type="checkbox" id="private_box" name="query_private" value="1" <%= "checked" if @the_user.private %>>
 
-        <label for="private_box">
-            Private
-        </label>
-      </div>
+          <label for="private_box">
+              Private
+          </label>
+        </div>
 
-      <div>
-        <label for="username_box">
-          Username
-        </label>
+        <div>
+          <label for="username_box">
+            Username
+          </label>
 
-        <input type="text" id="username_box" name="query_username" value="<%= @the_user.username %>">
-      </div>
+          <input type="text" id="username_box" name="query_username" value="<%= @the_user.username %>">
+        </div>
 
-      <button>
-        Update user
-      </button>
-    </form>
+        <button>
+          Update user
+        </button>
+      </form>
+    </div>
   </div>
-</div>
+<% end %>
+
+<table border="1">
+  <tr>
+    <th>
+      Image
+    </th>
+
+    <th>
+      Owner
+    </th>
+
+    <th>
+      Caption
+    </th>
+
+    <th>
+      Posted
+    </th>
+
+    <th>
+      Likes
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @list_of_photos.each do |a_photo| %>
+    <tr>
+      <td>
+        <%# this is causing issues %>
+        <img src="<%#= a_photo.cloud_name %>" class="img-responsive">  
+      </td>
+
+      <td>
+        <%= a_photo.owner_id %>
+      </td>
+
+      <td>
+        <%= a_photo.caption %>
+      </td>
+
+      <td>
+        <%= time_ago_in_words(a_photo.created_at) %> ago
+      </td>
+
+      <td>
+        <%= a_photo.likes_count %>
+      </td>
+
+      <td>
+        <a href="/photos/<%= a_photo.id %>">
+          Show details
+        </a>
+      </td>
+    </tr>
+  <% end %>
+</table>
 
 <hr>
